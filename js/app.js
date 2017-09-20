@@ -1,7 +1,8 @@
 // Enemies our player must avoid
-  var Enemy = function(x, y) {
+  var Enemy = function(x, y,speed) {
      this.x = x;
      this.y = y;
+this.speed = speed;
      this.sprite = 'images/enemy-bug.png';
   };
 
