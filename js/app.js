@@ -17,6 +17,7 @@ this.speed =  Math.random()*250+150;
      if(this.x >= 505){
         this.x = -30;
     }
+
 };
 
  // Draw the enemy on the screen, required method for game
@@ -44,26 +45,40 @@ var count = 0;
             this.y = 404;
        }
     }
+    this.checkCollisions = function(){
+      for(var i=0;i<allEnemies.length;i++){
+         if(this.y === allEnemies[i].y){
+           console.log(this.y, allEnemies[i].y)
+             if((Math.abs(this.y - allEnemies[i].y))<60){
+                 this.x =200;
+                 this.y =404;
+             }
+        }
+     }
 
- }
+    };
+
+ };
  Player.prototype.handleInput = function (movement) {
    switch (movement) {
-       case 'left': this.x -= 101; break;
-       case 'right': this.x += 101; break;
-       case 'up': this.y -= 83; break;
-       case 'down': this.y += 83; break;
+       case 'left':
+        if (this.x > 0 )
+        {this.x -= 101; }
+       break;
+       case 'right':
+       if (this .x > 0)
+       {this.x += 101;}
+        break;
+       case 'up':
+       if (this.y > 0 )
+       {this.y -= 83;}
+        break;
+       case 'down':
+       if (this .y > 0 )
+       {this.y += 83;}
+        break;
     }
 }
-Player.prototype.checkCollisions = function(){
-    for(var i=0;i<allEnemies.length;i++){
-        if(this.y === allEnemies[i].y){
-            if((Math.abs(this.x - allEnemies[i].x))<40){
-                this.x =200;
-                this.y =404;
-            }
-       }
-    }
-};
 
  Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
