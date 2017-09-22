@@ -37,7 +37,7 @@ var Player = function (x, y) {
  }
 var count = 0;
  Player.prototype.update = function (dt) {
-   if(this.y === -11){
+   if(this.y < -11){
        count++;
        if(count%3 === 2){
             alert("good job！！ 点击确定后进入下一盘游戏");
@@ -45,36 +45,36 @@ var count = 0;
             this.y = 404;
        }
     }
-    this.checkCollisions = function(){
-      for(var i=0;i<allEnemies.length;i++){
-         if(this.y === allEnemies[i].y){
-           console.log(this.y, allEnemies[i].y)
-             if((Math.abs(this.y - allEnemies[i].y))<60){
-                 this.x =200;
-                 this.y =404;
-             }
-        }
-     }
-
-    };
-
+    this.checkCollisions();
  };
+ Player.prototype.checkCollisions = function() {
+ for (var i = 0; i < allEnemies.length; i++) {
+     // 判断 y 轴方向是否发生碰撞
+     if (Math.abs(this.y - allEnemies[i].y) < 60) {
+         // 判断  x 轴方向是否发生碰撞
+         if ((Math.abs(this.x - allEnemies[i].x)) < 60) {
+             this.x = 200;
+             this.y = 404;
+         }
+     }
+ }
+};
  Player.prototype.handleInput = function (movement) {
    switch (movement) {
        case 'left':
-        if (this.x > 0 )
+        if (this.x > 354 )
         {this.x -= 101; }
        break;
        case 'right':
-       if (this .x > 0)
+       if (this .x > 354)
        {this.x += 101;}
         break;
        case 'up':
-       if (this.y > 0 )
+       if (this.y > 72 )
        {this.y -= 83;}
         break;
        case 'down':
-       if (this .y > 0 )
+       if (this .y > 321)
        {this.y += 83;}
         break;
     }
