@@ -62,19 +62,19 @@ var count = 0;
  Player.prototype.handleInput = function (movement) {
    switch (movement) {
        case 'left':
-        if (this.x > 354 )
+        if (this.x > 0 )
         {this.x -= 101; }
        break;
        case 'right':
-       if (this .x > 354)
+       if (this .x < 400)
        {this.x += 101;}
         break;
        case 'up':
-       if (this.y > 72 )
+       if (this.y > 0 )
        {this.y -= 83;}
         break;
        case 'down':
-       if (this .y > 321)
+       if (this .y > 380)
        {this.y += 83;}
         break;
     }
@@ -89,7 +89,7 @@ for(var i=0;i<6;i++){
   var bugs = new Enemy(-30,83*(i%3)+72);
 
   allEnemies.push(bugs);
-};
+}
     var player = new Player(101, 83 * 3 + 55)
  // Now instantiate your objects.
  // Place all enemy objects in an array called allEnemies
