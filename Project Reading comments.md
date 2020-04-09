@@ -2,19 +2,25 @@
 
 ### Product Profile:
 
-<br>1.Fuctions You want to achieve:
+#### 1.Fuctions You want to achieve:
 
 1.Players acould move to the river.
 
 2.Allow the palyers to avoid the crash with bugs.
 
-<br>2.Objects: Bugs and players
+#### 2.Objects: Bugs and players
 
-<br>3.Enviroments: River and grass land
+#### 3.Enviroments: River and grass land
 
 ### divide it into code perspective:
 
+Project fold Files orgnazized:
+
 Whloe project is composed with CSS file, JS file , index.html file, Read.md 4 files, 
+Once the project is loading, the resources.js will cache  image sources, and project features is achieved in 
+app.js, and engine.js repeats this process. all images resources could be found in images,Css doesn't perform alot 
+in this projec.
+
 app.js will utilize JS feature to build:
 
 --Bugs and player object builiding
@@ -26,6 +32,11 @@ app.js will utilize JS feature to build:
 <br>https://github.com/udacity/frontend-nanodegree-arcade-game
 
 2. Then you need to move to app.js file to understand the JS code file structure.
+--Bugs and player object builiding
+--bugs's moving and player's moving
+--all animation feature is achieved in Canvas
+
+### Transfer it to Code.
 
 Thoughts Area:
 Once the project is loading, the resources.js will cache  image sources, and project features is achieved in 
