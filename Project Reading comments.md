@@ -36,11 +36,11 @@ app.js will utilize JS feature to build:
 --bugs's moving and player's moving
 --all animation feature is achieved in Canvas
 
-### Transfer it to Code.
+### Translate it to Code.
 
 ### Thoughts Area:
 Once the project is loading, the resources.js will cache  image sources, and project features is achieved in 
 app.js, and engine.js repeats this process. all images resources could be found in images,Css doesn't perform alot 
 in this projec.
 
-Product Profile --- > divide it into code perspective -- > Transfer it to Code.
+Product Profile --- > divide it into code perspective -- > Translate it to Code.
