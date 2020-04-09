@@ -1,6 +1,6 @@
 ## Project Reading comments:
 
-### Product Profile:
+### 1.Product Profile:
 
 #### 1.Fuctions You want to achieve:
 
@@ -12,7 +12,7 @@
 
 #### 3.Enviroments: River and grass land
 
-### divide it into code perspective:
+### 2.divide it into code perspective:
 
 #### 1.Project fold Files orgnazized:
 
@@ -36,7 +36,7 @@ app.js will utilize JS feature to build:
 --bugs's moving and player's moving
 --all animation feature is achieved in Canvas
 
-### Translate it to Code.
+### 3.Translate it to Code.
 
 ### Thoughts Area:
 Once the project is loading, the resources.js will cache  image sources, and project features is achieved in 
