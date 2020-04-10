@@ -37,6 +37,9 @@ app.js will utilize JS feature to build:
 --all animation feature is achieved in Canvas
 
 ### 3.Translate it to Code.
+1.First Use this to build a two objec bugs and Player
+2.
+
 
 ### Thoughts Area:
 Once the project is loading, the resources.js will cache  image sources, and project features is achieved in 
