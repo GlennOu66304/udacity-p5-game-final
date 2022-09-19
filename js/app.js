@@ -1,110 +1,101 @@
-// Enemies our player must avoid
-  var Enemy = function(x, y,speed) {
-     this.x = x;
-     this.y = y;
-this.speed =  Math.random()*250+150;
-     this.sprite = 'images/enemy-bug.png';
-  };
+var Engine = (function (global) {
+  var doc = global.document,
+    win = global.window,
+    canvas = doc.createElement("canvas"),
+    ctx = canvas.getContext("2d"),
+    lastTime;
 
- // Update the enemy's position, required method for game
-  // Parameter: dt, a time delta between ticks
-   Enemy.prototype.update = function(dt,x) {
+  canvas.width = 500;
+  canvas.height = 600;
+  doc.body.appendChild(canvas);
 
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-     // all computers.
-     this.x += dt * this.speed
-     if(this.x >= 505){
-        this.x = -30;
+  function main() {
+    var now = Date.now(),
+      dt = (now - lastTime) / 1000.0;
+    render();
+    update(dt);
+   
+
+    lastTime = now;
+    win.requestAnimationFrame(main);
+  }
+
+  function init() {
+    reset();
+    lastTime = Date.now();
+    main();
+  }
+
+
+  // render the playground
+  function render() {
+    var rowImages = [
+        "images/water-block.png", // 这一行是河。
+        "images/stone-block.png", // 第一行石头
+        "images/stone-block.png", // 第二行石头
+        "images/stone-block.png", // 第三行石头
+        "images/grass-block.png", // 第一行草地
+        "images/grass-block.png", // 第二行草地
+      ],
+      numRows = 6,
+      numCols = 5,
+      row,
+      col;
+
+    for (row = 0; row < numRows; row++) {
+      for (col = 0; col < numCols; col++) {
+        // reseouces.get is from the resource.js its get function
+        // covner the image array to the html img content as url
+        // console.log(Resources.get(rowImages[row]));
+        ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
+
+        // the draww image function cruly brace the ：
+        // image of Resources.get(rowImages[row]),and the location on canvacol * 101, row * 83
+        // HTML canvas drawImage() Method
+        // https://www.w3schools.com/tags/canvas_drawimage.asp
+      }
     }
 
-};
+    renderEntities();
+  }
 
- // Draw the enemy on the screen, required method for game
- Enemy.prototype.render = function() {
-     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
- };
+  // render the enemy and player
+  function renderEntities() {
+    /* 遍历在 allEnemies 数组中存放的作于对象然后调用你事先定义的 render 函数 */
+    allEnemies.forEach(function (enemy) {
+      enemy.render();
+    });
 
- // Now write your own player class
- // This class requires an update(), render() and
-// a handleInput() method.
+    player.render();
+  }
 
+  function update(dt) {
+    updateEntities(dt);
+    //
+  }
 
-var Player = function (x, y) {
-    this.x = x;
-   this.y = y;
-    this.sprite = 'images/char-boy.png'
- }
-var count = 0;
- Player.prototype.update = function (dt) {
-   if(this.y < -11){
-       count++;
-       if(count%3 === 2){
-            alert("good job！！ 点击确定后进入下一盘游戏");
-            this.x = 200;
-            this.y = 404;
-       }
-    }
-    this.checkCollisions();
- };
- Player.prototype.checkCollisions = function() {
- for (var i = 0; i < allEnemies.length; i++) {
-     // 判断 y 轴方向是否发生碰撞
-     if (Math.abs(this.y - allEnemies[i].y) < 60) {
-         // 判断  x 轴方向是否发生碰撞
-         if ((Math.abs(this.x - allEnemies[i].x)) < 60) {
-             this.x = 200;
-             this.y = 404;
-         }
-     }
- }
-};
- Player.prototype.handleInput = function (movement) {
-   switch (movement) {
-       case 'left':
-        if (this.x > 0 )
-        {this.x -= 101; }
-       break;
-       case 'right':
-       if (this .x < 400)
-       {this.x += 101;}
-        break;
-       case 'up':
-       if (this.y > 0 )
-       {this.y -= 83;}
-        break;
-       case 'down':
-       if (this .y > 380)
-       {this.y += 83;}
-        break;
-    }
-}
+  function updateEntities(dt) {
+    allEnemies.forEach(function (enemy) {
+      enemy.update(dt);
+    });
+    // first check if there is a crash
+    player.checkCollisions();
+    // if no crash, then update the item, then go to the destination
+    player.update();
+  }
 
- Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
- };
+  function reset() {
+    // 空操作
+  }
 
- var allEnemies = [];
-for(var i=0;i<6;i++){
-  var bugs = new Enemy(-30,83*(i%3)+72);
+  Resources.load([
+    "images/stone-block.png",
+    "images/water-block.png",
+    "images/grass-block.png",
+    "images/enemy-bug.png",
+    "images/char-boy.png",
+  ]);
+  Resources.onReady(init);
 
-  allEnemies.push(bugs);
-}
-    var player = new Player(101, 83 * 3 + 55)
- // Now instantiate your objects.
- // Place all enemy objects in an array called allEnemies
- // Place the player object in a variable called player
-
-
- // This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
- document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
-         37: 'left',
-         38: 'up',
-         39: 'right',
-         40: 'down'
-   };
-
-    player.handleInput(allowedKeys[e.keyCode]);
- });
+  global.ctx = ctx;
+})(this);
